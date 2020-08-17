@@ -15,7 +15,7 @@ script(type="text/x-template")#reviews
               .user-min
                 .user-min__avatar
                   .user-min__pic-wrapper
-                    img(:src="`http://localhost:8000/${review.photo}`").user-min__avatar-pic
+                    img(:src="`http://localhost:8080/${review.photo}`").user-min__avatar-pic
                 .user-min__info
                   .user-min__name {{review.author}}
                   .user-min__occ {{review.occ}}

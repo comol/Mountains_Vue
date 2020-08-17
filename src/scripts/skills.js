@@ -46,6 +46,7 @@ const skillsRow = {
 
 new Vue({
   el: "#skills-component",
+  template: "#skills-list",
   components: {
     skillsRow
   },
@@ -63,9 +64,11 @@ new Vue({
       this.skills = skills;
     }
   },
-  async created() {
-    await this.fetchCategories();
-    await this.fetchSkills();
+  created() {
+    // Заготовка на будущее при реализации бэкенда
+    //await this.fetchCategories();
+    //await this.fetchSkills();
+    this.skills  = require("../data/skills.json");
+    this.categories = require("../data/categories.json");
   },
-  template: "#skills-list"
 });
