@@ -79,7 +79,8 @@ new Vue({
     }
   },
   async created() {
-    await this.fetchReviews();
+    //await this.fetchReviews();
+    this.reviews = require("../data/reviews.json");
   },
   mounted() {
     this.resetSliderOnResize();

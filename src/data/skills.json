@@ -1,0 +1,50 @@
+[
+      {
+        "id": 1,
+        "category": "Frontend",
+        "title": "HTML5",
+        "percent": 32
+      },
+      {
+        "id": 2,
+        "category": "Frontend",
+        "title": "CSS3",
+        "percent": 76
+      },
+      {
+        "id": 3,
+        "category": "Frontend",
+        "title": "Javascript",
+        "percent": 15
+      },
+      {
+        "id": 4,
+        "category": "Frontend",
+        "title": "Jquery и Vue.js",
+        "percent": 50
+      },
+      {
+        "id": 5,
+        "category": "Workflow",
+        "title": "GIT",
+        "percent": 15
+      },
+      {
+        "id": 6,
+        "category": "Workflow",
+        "title": "Terminal",
+        "percent": 25
+      },
+      {
+        "id": 7,
+        "category": "Workflow",
+        "title": "Gulp",
+        "percent": 50
+      },
+      {
+        "id": 8,
+        "category": "Workflow",
+        "title": "Webpack",
+        "percent": 45
+      }
+]

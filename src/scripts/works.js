@@ -65,6 +65,7 @@ const display = {
 
 new Vue({
   el: "#works-slider-component",
+  template: "#slider-container",
   data() {
     return {
       works: [],
@@ -115,7 +116,9 @@ new Vue({
     }
   },
   async mounted() {
-    await this.fetchWorks();
+    //await this.fetchWorks();
   },
-  template: "#slider-container"
+  created() {
+    this.works = require("../data/works.json");
+  }
 });
