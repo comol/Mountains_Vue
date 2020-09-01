@@ -9,7 +9,7 @@
       class="input__elem field__elem"
       v-bind="$attrs"
       :value="value"
-      @input="$emit('input', $event.target.value)"
+      @input="$emit('input', $event.target.value); errorMessage=''"
     />
     <div class="input__error-tooltip">
       <tooltip :text="errorMessage"></tooltip>
@@ -26,7 +26,7 @@
       class="textarea__elem field__elem"
       :value="value"
       :class="{'error' : !!errorMessage}"
-      @input="$emit('input', $event.target.value)"
+      @input="$emit('input', $event.target.value); errorMessage=''"
     ></textarea>
     <div class="input__error-tooltip">
       <tooltip :text="errorMessage"></tooltip>

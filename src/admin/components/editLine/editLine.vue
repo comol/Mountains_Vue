@@ -23,7 +23,7 @@
           <icon symbol="tick" @click="onApprove"></icon>
         </div>
         <div class="button-icon">
-          <icon symbol="cross" @click="$emit('remove')"></icon>
+          <icon symbol="cross" @click="onRemove"></icon>
         </div>
       </div>
     </div>
@@ -41,11 +41,12 @@ export default {
       type: String,
       default: ""
     },
+    editModelByDefault: Boolean,
     blocked: Boolean
   },
   data() {
     return {
-      editmode: false,
+      editmode: this.editModelByDefault,
       title: this.value
     };
   },
@@ -55,7 +56,14 @@ export default {
         this.editmode = false;
       } else {
         this.$emit("approve", this.value);
+        this.$emit("lineedited")
+        this.editmode = false;
       }
+    },
+    onRemove() {
+      this.editmode = false;
+      this.value = this.title;
+      this.$emit("remove");
     }
   },
   components: {
