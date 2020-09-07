@@ -1,0 +1,44 @@
+@mixin phones() {
+    @media screen and (max-width: $bp-phones) {
+        @content;
+    }
+}
+
+.list {
+    display: flex;
+}
+
+.link {
+    padding: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+
+    @include phones {
+        padding-right: 0;
+        padding-left: 0;
+        padding-top: 30px;
+        padding-bottom: 10px;
+    }
+
+    &:hover {
+        color: #383bcf;
+        position: relative;
+
+        &:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #383bcf;
+        }
+    }
+}
+
+.item__navigation {
+    max-width: 150px;
+}
