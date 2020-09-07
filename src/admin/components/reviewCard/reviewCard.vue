@@ -4,15 +4,15 @@
       <div class="pic">
         <img class="image" :src="cover"/>
         <div class="tag">
-          <tags-list :tags="work.techs"/>
+          <tags-list :tags="review.techs"/>
         </div>
       </div>
       <div class="data">
-        <div class="title">{{work.title}}</div>
+        <div class="title">{{review.title}}</div>
         <div class="text">
-          <p>{{work.description}}</p>
+          <p>{{review.description}}</p>
         </div>
-        <a :href="work.link" class="link">{{work.link}}</a>
+        <a :href="review.link" class="link">{{review.link}}</a>
         <div class="btns">
           <icon symbol="pencil" title="Править"></icon>
           <icon symbol="trash" title="Удалить"></icon>
@@ -29,14 +29,14 @@ import tagsList from "../tagsList";
 export default {
   components: { card, icon, tagsList },
   props: {
-    work: Object,
+    review: Object,
   },
   computed: {
     cover() {
-      return `http://home.filippovoleg.ru:9000/${this.work.photo}`
+      return `http://home.filippovoleg.ru:9000/${this.review.photo}`
     }
   },
 };
 </script>
 
-<style scoped lang="postcss" src="./workCard.pcss"></style>
+<style scoped lang="postcss" src="./reviewCard.pcss"></style>

@@ -73,14 +73,16 @@ new Vue({
       };
     },
     async fetchReviews() {
-      const { data: reviews } = await axios.get("/reviews/1");
+      const { data: reviews } = await axios.get("/reviews/382");
 
       this.reviews = reviews;
     }
   },
   async created() {
-    //await this.fetchReviews();
-    this.reviews = require("../data/reviews.json");
+    await this.fetchReviews();
+    if (this.reviews.length === 0) {
+      this.reviews = require("../data/reviews.json");
+    }
   },
   mounted() {
     this.resetSliderOnResize();

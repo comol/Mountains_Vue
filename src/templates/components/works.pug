@@ -15,7 +15,7 @@ script(type="text/x-template")#slider-display
   .works-slider__pics(:data-slide="currentIndex + 1")
     .works-slider__pics-content
       transition-group(name="fade" tag="div").works-slider__fullpic-container
-        img(:src="`http://localhost:8080/${currentWork.photo}`" :key="currentWork.id").works-slider__fullpic
+        img(:src="`http://home.filippovoleg.ru:9000/${currentWork.photo}`" :key="currentWork.id").works-slider__fullpic
       btns(
         @slide="direction => $emit('slide', direction)"
       )
@@ -35,7 +35,7 @@ script(type="text/x-template")#slider-thumbs
       a.works-slider__thumb-link(
         @click="$emit('slideDirectly', work)"
       )
-        img(:src="`http://localhost:8080/${work.photo}`", alt="").works-slider__thumb
+        img(:src="`http://home.filippovoleg.ru:9000/${work.photo}`", alt="").works-slider__thumb
 
 script(type="text/x-template")#slider-btns
   .works-slider__buttons

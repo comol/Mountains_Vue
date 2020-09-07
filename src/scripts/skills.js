@@ -56,19 +56,21 @@ new Vue({
   },
   methods: {
     async fetchCategories() {
-      const { data: categories } = await axios.get("/categories/1");
+      const { data: categories } = await axios.get("/categories/382");
       this.categories = categories;
     },
     async fetchSkills() {
-      const { data: skills } = await axios.get("/skills/1");
+      const { data: skills } = await axios.get("/skills/382");
       this.skills = skills;
     }
   },
   async created() {
     // Заготовка на будущее при реализации бэкенда
-    //await this.fetchCategories();
-    //await this.fetchSkills();
-    this.skills  = require("../data/skills.json");
-    this.categories = require("../data/categories.json");
+    await this.fetchCategories();
+    await this.fetchSkills();
+    if (this.categories.length === 0) {
+      this.skills = require("../data/skills.json");
+      this.categories = require("../data/categories.json");
+    }
   },
 });

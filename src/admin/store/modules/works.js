@@ -29,7 +29,7 @@ export default {
 
         async fetch({commit}) {
             try {
-                const { data } = await this.$axios.get("/works/1");
+                const { data } = await this.$axios.get("/works/382");
                 commit("SET_WORKS", data);
             } catch (error) {
                 console.log("error");

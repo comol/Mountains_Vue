@@ -106,7 +106,7 @@ new Vue({
       if (value < 0) this.currentIndex = worksAmount;
     },
     async fetchWorks() {
-      const { data: works } = await axios.get("/works/1");
+      const { data: works } = await axios.get("/works/382");
       this.works = works;
     }
   },
@@ -115,10 +115,10 @@ new Vue({
       this.makeInfititeLoopForCurIndex(value);
     }
   },
-  async mounted() {
+  async created() {
     await this.fetchWorks();
-  },
-  created() {
-    this.works = require("../data/works.json");
+    if (this.works.length === 0) {
+      this.works = require("../data/works.json");
+    }
   }
 });
