@@ -18,7 +18,7 @@
 </template>
 
 <script>
-    import card from "../Card";
+    import card from "../card";
     import editLine from "../editLine";
     import skill from "../skill";
     import skillAddLine from "../skillAddLine";

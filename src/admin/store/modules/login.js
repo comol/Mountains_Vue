@@ -5,7 +5,6 @@ export default {
     },
     mutations: {
         SET_LOGIN: (state, loggedIn) => {
-            console.log(loggedIn);
             state.isLoggedIn = loggedIn;
         }
     },

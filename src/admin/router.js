@@ -1,52 +1,51 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from "./store";
+import axios from "axios";
 
 Vue.use(VueRouter);
 
-import header from "./components/header";
-import about from "./pages/about";
-import login from "./pages/login";
-
-
-function loggedIn () {
-    return !!localStorage.token
-}
-
-export function requireAuth (to, from, next) {
-    if (!loggedIn()) {
-        next({
-            path: '/login',
-            query: { redirect: to.fullPath }
-        })
-    } else {
-        next()
-    }
-}
+ import header from "./components/header";
+ import about from "./pages/about";
+ import works from "./pages/works";
+ import login from "./pages/login";
 
 const routes = [
     {
         path: "/",
         components: {
-            default: about,
-            header: header
+            default: () => import("./pages/about"),
+            header: () => import("./components/header")
         },
-        beforeEnter: requireAuth
     },
     {
-        path: "/about",
+        path: "/works",
         components: {
-            default: about,
-            header: header
+            default: () => import("./pages/works"),
+            header: () => import("./components/header")
         },
-        beforeEnter: requireAuth
     },
     {
         path: "/login",
-        components: {
-            default: login,
-            header: header
+        component: () => import("./pages/login"),
+        meta: {
+            public: true
         }
     },
 ];
 
-export default new VueRouter({routes});
+const router = new VueRouter({ routes });
+
+const guard = axios.create({
+    baseURL: "https://webdev-api.loftschool.com"
+});
+
+router.beforeEach(async (to, from, next) => {
+    const isPublicRoute = to.matched.some(route => route.meta.public);
+    const isUserLoggedIn = store.getters["user/userIsLoggedIn"];
+
+    next();
+
+});
+
+export default router;

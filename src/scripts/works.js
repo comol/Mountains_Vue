@@ -1,7 +1,7 @@
 import Vue from "vue";
 import axios from "axios";
 
-const baseUrl = process.env.BASE_URL;
+const baseUrl = "https://webdev-api.loftschool.com";
 
 axios.defaults.baseURL = baseUrl;
 
@@ -116,7 +116,7 @@ new Vue({
     }
   },
   async mounted() {
-    //await this.fetchWorks();
+    await this.fetchWorks();
   },
   created() {
     this.works = require("../data/works.json");

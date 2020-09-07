@@ -21,9 +21,9 @@
         },
         data() {
             return {
-                links: [{id: 0, title: "Обо мне", alias: "#", active: true},
-                  {id: 1, title: "Работы", alias: "works", active: false},
-                  {id: 2, title: "Отзывы", alias: "reviews", active: false},]
+                links: [{id: 0, title: "Обо мне", alias: "", active: true},
+                  {id: 1, title: "Работы", alias: "admin#/works", active: false},
+                  {id: 2, title: "Отзывы", alias: "admin#/reviews", active: false},]
             }
         }
     }

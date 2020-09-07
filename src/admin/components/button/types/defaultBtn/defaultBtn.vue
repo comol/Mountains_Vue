@@ -16,7 +16,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Отправить"
+      default: "Загрузить"
     },
     disabled: {
       type: Boolean,

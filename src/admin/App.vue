@@ -35,12 +35,16 @@ export default {
   methods: {
     ...mapActions({
       hideTooltip: "tooltips/hide"
-    })
+    }),
+    ...mapActions({
+      loginAction: "login/login"
+    }),
   },
 
   created() {
-    //this.isTooltipShown = false;
+    this.loginAction();
   },
+
 
   computed: {
     ...mapState("tooltips", {
@@ -50,8 +54,7 @@ export default {
     }),
     ...mapState("login", {
       loggedIn: state => {
-           //this.$router.replace("/login");
-         return state.isLoggedIn;
+          return state.isLoggedIn;
         }
     })
   }
