@@ -1,6 +1,9 @@
 <template>
     <card slim>
-        <edit-line slot="title" @lineedited="onLineEdited" v-model="categoryTitle" :editModeByDefault="empty" @remove="$emit('remove', $event)"/>
+        <edit-line slot="title" @lineedited="onLineEdited" v-model="categoryTitle" :editModeByDefault="empty"
+                   @remove="$emit('remove', $event)"
+                   @approve="$emit('approve', $event)"
+        />
         <template slot="content">
             <ul class="skills-category">
                 <li class="category-item" v-for="skill in skills" :key="skill.id">
@@ -20,12 +23,6 @@
     import skill from "../skill";
     import skillAddLine from "../skillAddLine";
 
-    const skills = [
-        {id: 0, title: "html", percent: 80},
-        {id: 1, title: "css", percent: 20},
-        {id: 2, title: "Javascript", percent: 50}
-    ]
-
     export default {
         components: {
             card, editLine, skill, skillAddLine
@@ -34,6 +31,10 @@
         empty: Boolean,
         title: {
           type: String,
+        },
+        id: {
+          type: Number,
+          default: 0
         },
         skills: {
           type: Array,
@@ -47,42 +48,44 @@
         },
       methods: {
           onAddSkill(data) {
-            var skill = {
-              id: this.skills.length,
-              title: data.title,
-              percent: data.percent
-            }
-            this.skills.push(skill);
+             let skill = {
+               id: this.skills.length,
+               title: data.title,
+               percent: data.percent
+             };
+            this.$emit("create-skill", skill);
           },
 
         onLineEdited() {
-            this.$emit("onLineEdited", this.categoryTitle);
+            this.$emit("onLineEdited", {title: this.categoryTitle, id: this.id});
             this.empty = false;
         },
 
         onApprove(skillinfo) {
-            this.skills.forEach(function (currentskill) {
-              if (currentskill.id === skillinfo.id)
-              {
-                currentskill.title = skillinfo.title;
-                currentskill.percent = skillinfo.percent;
-              }
-            });
+             this.skills.forEach(function (currentskill) {
+               if (currentskill.id === skillinfo.id)
+               {
+                 currentskill.title = skillinfo.title;
+                 currentskill.percent = skillinfo.percent;
+               }
+             });
+            this.$emit("edit-skill", skillinfo);
         },
 
         onRemove(skillid) {
-
-          let skillarray = this.skills;
-          skillarray.forEach(function (currentskill) {
-            if (currentskill.id === skillid)
-            {
-              let index = skillarray.indexOf(currentskill);
-              skillarray.splice(index, 1);
-            }
-          });
+           let skillarray = this.skills;
+           let skilltoremove;
+           skillarray.forEach(function (currentskill) {
+             if (currentskill.id === skillid)
+             {
+               let index = skillarray.indexOf(currentskill);
+               skillarray.splice(index, 1);
+               skilltoremove = currentskill;
+             }
+           });
+          this.$emit("remove-skill", skilltoremove);
           this.skills = skillarray;
         }
-
       }
     }
 </script>

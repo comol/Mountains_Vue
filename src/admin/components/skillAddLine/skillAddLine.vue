@@ -4,7 +4,7 @@
             <app-input v-model="textvalue" placeholder="Новый навык" ref="skill"/>
         </div>
         <div class="percent">
-            <app-input v-model="percent" type="number" min="0" max="100" maxlength="3" ref="percent"/>
+            <app-input v-model="percent" type="number" min="0" max="100" maxlength="3" ref="percent"  />
         </div>
         <div class="button">
             <round-button type="round" @click="addSkill"/>
@@ -33,7 +33,7 @@
         roundButton: button,
       },
       methods: {
-        addSkill()
+        async addSkill()
         {
           if (this.textvalue.trim().length === 0)
           {

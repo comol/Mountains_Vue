@@ -1,0 +1,47 @@
+@import "../../../styles/mixins.pcss";
+
+.page-header {
+    display: flex;
+    margin-bottom: 60px;
+    @include phones {
+        flex-direction: column;
+        margin-bottom: 30px;
+        margin-top: 10px;
+    }
+}
+
+.page-content {
+    padding: 60px 0 20px;
+    flex: 1;
+    @include phones {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+
+.block-title {
+    margin-right: 60px;
+    font-size: 21px;
+    font-weight: bold;
+    color: $text-color;
+    @include phones {
+        margin-bottom: 10px;
+    }
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    @include phones {
+        flex-direction: column;
+    }
+}
+
+.item {
+    width: calc(100% / 2 - 30px);
+    @include phones {
+        width: 100%;
+    }
+    margin-right: 30px;
+    margin-bottom: 30px;
+}

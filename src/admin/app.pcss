@@ -1,51 +1,33 @@
+
+.bg-container {
+    &.loggedOut {
+        background: url("../images/bg/hero.jpg") no-repeat center center / cover fixed;
+    }
+}
+
 .app-container {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-}
 
-.page-header {
-    display: flex;
-    margin-bottom: 60px;
-    @include phones {
-        flex-direction: column;
-        margin-bottom: 30px;
-        margin-top: 10px;
+    &.loggedOut {
+        background: rgba(45, 60, 78, 0.9);
     }
 }
 
-.page-content {
-    padding: 60px 0 20px;
-    flex: 1;
-    @include phones {
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
+.notification {
+    transition: transform .3s
 }
 
-.block-title {
-    margin-right: 60px;
-    font-size: 21px;
-    font-weight: bold;
-    color: $text-color;
-    @include phones {
-        margin-bottom: 10px;
-    }
-}
+.notify-container {
+    position: fixed;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
 
-.skills {
-    display: flex;
-    flex-wrap: wrap;
-    @include phones {
-        flex-direction: column;
+    &.active {
+        .notification {
+            transform: translateY(-100%);
+        }
     }
-}
-
-.item {
-    width: calc(100% / 2 - 30px);
-    @include phones {
-        width: 100%;
-    }
-    margin-right: 30px;
-    margin-bottom: 30px;
 }
