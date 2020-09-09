@@ -1,64 +1,66 @@
 <template>
   <div class="login-page-component">
     <div class="content">
-      <div class="form" @submit.prevent="handleSubmit">
+      <form class="form" @submit.prevent="handleSubmit">
         <div class="form-title">Авторизация</div>
-        <div class="form-content">
-          <div class="row">
-            <app-input title="Логин" v-model="user.name" icon="user"
-                       :errorMessage="validation.firstError('user.name')" @input="textchanged"/>
-          </div>
-          <div class="row">
-            <app-input title="Пароль" v-model="user.password" icon="key" type="password"
-                       :errorMessage="validation.firstError('user.password')" @input="textchanged"/>
-          </div>
-          <div class="btn">
-            <appButton :disabled="isSubmitDisabled" title="Отправить" @click="handleSubmit"/>
-          </div>
+        <div class="row">
+          <app-input
+              title="Логин"
+              v-model="user.name"
+              icon="user"
+              :errorMessage="validation.firstError('user.name')" @input="textchanged"
+          />
         </div>
-
-      </div>
+        <div class="row">
+          <app-input
+              title="Пароль"
+              v-model="user.password"
+              icon="key"
+              type="password"
+              :errorMessage="validation.firstError('user.password')" @input="textchanged"
+          />
+        </div>
+        <div class="btn">
+          <app-button :disabled="isSubmitDisabled" title="Отправить" @click="handleSubmit"/>
+        </div>
+      </form>
     </div>
   </div>
 </template>
-
 <script>
 import appInput from "../../components/input";
 import appButton from "../../components/button";
-
-import {Validator, mixin as ValidatorMixin} from "simple-vue-validator";
+import { Validator, mixin as ValidatorMixin } from "simple-vue-validator";
 import $axios from "../../requests";
-import {mapActions} from "vuex";
-
+import { mapActions } from "vuex";
 export default {
   mixins: [ValidatorMixin],
   validators: {
-    "user.name": value => {
+    "user.name": (value) => {
       return Validator.value(value).required("Введите имя пользователя");
     },
-    "user.password": value => {
+    "user.password": (value) => {
       return Validator.value(value).required("Введите пароль");
-    }
+    },
   },
   data: () => ({
     user: {
       name: "",
-      password: ""
+      password: "",
     },
-    isSubmitDisabled: true
+    isSubmitDisabled: true,
   }),
-  components: {appButton, appInput},
+  components: { appButton, appInput },
   methods: {
     ...mapActions({
-      showTooltip: "tooltips/show"
-    }),
-    ...mapActions({
-      loginAction: "login/login"
+      showTooltip: "tooltips/show",
+      login: "user/login"
     }),
 
     textchanged() {
       this.isSubmitDisabled = false;
     },
+
     async handleSubmit() {
       if ((await this.$validate()) === false) return;
 
@@ -67,23 +69,21 @@ export default {
         const response = await $axios.post("/login", this.user);
         const token = response.data.token;
         localStorage.setItem("token", token);
-        $axios.defaults.headers["Authorization"] = "Bearer " + token;
-        await this.$router.replace("/");
-        await this.loginAction();
+        $axios.defaults.headers["Authorization"] = `Bearer ${token}`;
+        const userResponse = await $axios.get("/user");
+        this.login(userResponse.data.user);
+        this.$router.replace("/");
       } catch (error) {
         this.showTooltip({
           text: error.response.data.error,
           type: "error"
         })
       } finally {
-        this.isSubmitDisabled = false
+        this.isSubmitDisabled = false;
       }
-
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
-<style src="./login.pcss" scoped></style>
-
-
+<style lang="postcss" scoped src="./login.pcss"></style>

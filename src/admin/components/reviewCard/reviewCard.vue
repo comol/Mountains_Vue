@@ -33,7 +33,7 @@ export default {
   },
   computed: {
     cover() {
-      return `http://home.filippovoleg.ru:9000/${this.review.photo}`
+      return `https://webdev-api.loftschool.com/${this.review.photo}`
     }
   },
 };

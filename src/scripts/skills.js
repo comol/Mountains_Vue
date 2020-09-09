@@ -68,9 +68,5 @@ new Vue({
     // Заготовка на будущее при реализации бэкенда
     await this.fetchCategories();
     await this.fetchSkills();
-    if (this.categories.length === 0) {
-      this.skills = require("../data/skills.json");
-      this.categories = require("../data/categories.json");
-    }
   },
 });

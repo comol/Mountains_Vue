@@ -80,9 +80,6 @@ new Vue({
   },
   async created() {
     await this.fetchReviews();
-    if (this.reviews.length === 0) {
-      this.reviews = require("../data/reviews.json");
-    }
   },
   mounted() {
     this.resetSliderOnResize();

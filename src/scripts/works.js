@@ -117,8 +117,5 @@ new Vue({
   },
   async created() {
     await this.fetchWorks();
-    if (this.works.length === 0) {
-      this.works = require("../data/works.json");
-    }
   }
 });
