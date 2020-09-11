@@ -4,6 +4,7 @@
     v-if="typeAttr === 'button'"
     v-on="$listeners"
     :disabled="disabled"
+    :type="typetoshow"
   >{{title}}</button>
 
   <label class="btn-file-container" v-else-if="typeAttr === 'file'">
@@ -23,6 +24,10 @@ export default {
       default: false
     },
     plain: Boolean,
+    typetoshow: {
+      type: String,
+      default: ""
+    },
     typeAttr: {
       type: String,
       default: "button",

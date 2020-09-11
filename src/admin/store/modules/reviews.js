@@ -2,6 +2,7 @@ export default {
     namespaced: true,
     state: {
         data: [],
+        currentReview: {}
     },
     mutations: {
         ADD_REVIEW(state, newReview) {
@@ -9,6 +10,9 @@ export default {
         },
         SET_REVIEWS(state, reviews) {
             state.data = reviews
+        },
+        EDIT_REVIEW(state, review) {
+            state.currentReview = review;
         }
     },
     actions: {
@@ -36,6 +40,33 @@ export default {
             } catch (error) {
                 console.log("error");
             }
-        }
+        },
+
+
+        async delete({commit}, reviewid) {
+            try {
+                const { data } = await this.$axios.delete("/reviews/" + reviewid);
+            } catch (error) {
+                console.log("error");
+            }
+        },
+
+        async edit({ commit }, newReview) {
+            commit("EDIT_REVIEW", newReview);
+        },
+
+        async editreview({ commit }, newReview) {
+            const formData = new FormData();
+
+            Object.keys(newReview).forEach(item => {
+                formData.append(item, newReview[item]);
+            })
+
+            try {
+                const { data } = await this.$axios.post("/reviews/" + newReview.id, formData);
+            } catch (error) {
+                console.log("error");
+            }
+        },
     },
 };

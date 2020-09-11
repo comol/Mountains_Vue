@@ -11,7 +11,7 @@
         <ul class="skills" v-if="empty===false">
           <li class="item" v-if="emptyCatIsShown || categories.length === 0">
             <category
-                @remove="emptyCatIsShown = false"
+                @remove="deleteCategory($event, 0)"
                 @onLineEdited="oncategoryEdited"
                 empty/>
           </li>
@@ -20,7 +20,8 @@
                       @create-skill="createSkill($event, category.id)"
                       @edit-skill="editSkill"
                       @remove-skill="removeSkill"
-                      @onLineEdited="oncategoryEdited" />
+                      @onLineEdited="oncategoryEdited"
+                      @remove="deleteCategory($event, category.id)" />
           </li>
         </ul>
       </div>
@@ -72,6 +73,7 @@ export default {
   methods: {
     ...mapActions({
       createCategoryAction: "categories/create",
+      deleteCategoryAction: "categories/delete",
       fetchCategoryAction: "categories/fetch",
       addSkillAction: "skills/add",
       editSkillAction: "skills/edit",
@@ -100,6 +102,22 @@ export default {
         this.emptyCatIsShown = false;
         this.createCategory(categoryobj);
     },
+
+    async deleteCategory(categoryobj, catid) {
+      this.emptyCatIsShown = false;
+      if (catid === 0)
+      {
+        return;
+      };
+      try {
+        await this.deleteCategoryAction(catid);
+      } catch (e) {
+
+      }
+      await this.fetchCategoryAction();
+
+    },
+
     async createCategory(categoryobj) {
       try {
         await this.createCategoryAction(categoryobj);

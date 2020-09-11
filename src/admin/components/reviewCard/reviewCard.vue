@@ -1,21 +1,25 @@
 <template>
   <card simple>
     <div class="works-wrapper">
-      <div class="pic">
-        <img class="image" :src="cover"/>
-        <div class="tag">
-          <tags-list :tags="review.techs"/>
+      <div class="header">
+        <div class="authorgroup">
+          <div class="avatar">
+            <img class="image" :src="cover"/>
+          </div>
+          <div class="textname">
+            <div class="author">{{ review.author }}</div>
+            <div class="occ">{{ review.occ }}</div>
+          </div>
         </div>
       </div>
+
       <div class="data">
-        <div class="title">{{review.title}}</div>
         <div class="text">
-          <p>{{review.description}}</p>
+          <p>{{ review.text }}</p>
         </div>
-        <a :href="review.link" class="link">{{review.link}}</a>
         <div class="btns">
-          <icon symbol="pencil" title="Править"></icon>
-          <icon symbol="trash" title="Удалить"></icon>
+          <icon symbol="pencil" title="Править" @click="edreview"></icon>
+          <icon symbol="trash" title="Удалить" @click="delreview"></icon>
         </div>
       </div>
     </div>
@@ -26,10 +30,29 @@
 import card from "../card";
 import icon from "../icon";
 import tagsList from "../tagsList";
+import {mapActions} from "vuex";
+
 export default {
-  components: { card, icon, tagsList },
+  components: {card, icon, tagsList},
   props: {
     review: Object,
+  },
+  methods: {
+    ...mapActions({
+      deletereview: "reviews/delete",
+      fetchReviews: "reviews/fetch",
+      editreview: "reviews/edit",
+    }),
+
+    async delreview(review) {
+      await this.deletereview(this.review.id);
+      await this.fetchReviews();
+    },
+
+    async edreview(review) {
+      await this.editreview(this.review);
+    }
+
   },
   computed: {
     cover() {

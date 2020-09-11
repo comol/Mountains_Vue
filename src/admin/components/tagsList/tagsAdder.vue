@@ -4,6 +4,7 @@
         title="Добавление тега"
         v-model="currentTags"
         @input="$emit('change', currentTags)"
+        v-if="editable === true"
     />
     <ul class="tags">
       <li class="tag"
@@ -33,6 +34,10 @@ export default {
     tags: {
       type: String,
       default: ""
+    },
+    editable: {
+      type: Boolean,
+      default: true
     }
   },
   model: {

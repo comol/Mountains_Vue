@@ -63,6 +63,14 @@ export default {
                 throw new Error("Произошла ошибка");
             }
         },
+        async delete({commit}, categoryid)  {
+            try {
+                    data = await this.$axios.delete("/categories/" + categoryid);
+
+            } catch (error) {
+                throw new Error("Произошла ошибка");
+            }
+        },
         async fetch({commit}) {
             try {
                 const userdata = await this.$axios.get("/user");

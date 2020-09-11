@@ -54,7 +54,8 @@ export default {
   methods: {
     ...mapActions({
       showTooltip: "tooltips/show",
-      login: "user/login"
+      login: "user/login",
+      loginAction: "login/login"
     }),
 
     textchanged() {
@@ -72,6 +73,7 @@ export default {
         $axios.defaults.headers["Authorization"] = `Bearer ${token}`;
         const userResponse = await $axios.get("/user");
         this.login(userResponse.data.user);
+        await this.loginAction();
         this.$router.replace("/");
       } catch (error) {
         this.showTooltip({

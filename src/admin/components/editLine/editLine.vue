@@ -62,8 +62,7 @@ export default {
     },
     onRemove() {
       this.editmode = false;
-      this.value = this.title;
-      this.$emit("remove");
+      this.$emit("removeline");
     }
   },
   components: {

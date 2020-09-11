@@ -5,7 +5,7 @@ import VueSimpleValidator from "simple-vue-validator";
 import store from './store';
 import $axios from './requests';
 
-Vue.use(VueSimpleValidator, {mode: 'manual'});
+Vue.use(VueSimpleValidator, {mode: 'conservative'});
 
 store.$axios = $axios;
 

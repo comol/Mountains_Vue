@@ -1,18 +1,30 @@
 <template>
   <div class="tags-adder-component">
-    <app-input title="Добавление тега" v-model="currentTags" @input="$emit('change', currentTags)"/>
+    <app-input
+        title="Добавление тега"
+        v-model="currentTags"
+        @input="$emit('change', currentTags)"
+        :error-message="errorMessage"
+    />
     <ul class="tags">
-      <li class="tag" v-for="(tag, index) in tagsArray" :key="'${tag}${index}'" v-if="tag.trim()">
-        <tag interactive :title="tag" @click="removeTag(tag)"/>
+      <li class="tag"
+          v-for="(tag, index) in tagsArray"
+          :key="`${tag}${index}`"
+          v-if="tag.trim()"
+      >
+        <tag
+            interactive
+            :title="tag"
+            @click="removeTag(tag)"
+        />
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import appInput from '../input';
+import appInput from "../input";
 import tag from "../tag";
-
 export default {
   components: {
     appInput,
@@ -20,6 +32,10 @@ export default {
   },
   props: {
     tags: {
+      type: String,
+      default: ""
+    },
+    errorMessage: {
       type: String,
       default: "",
     }
@@ -35,21 +51,20 @@ export default {
   },
   computed: {
     tagsArray() {
-      return this.currentTags.trim().split(',');
+      return this.tags.trim().split(',');
     }
   },
   methods: {
     removeTag(tag) {
-      const tags = [...tihs.tagsArray];
+      const tags = [...this.tagsArray];
       const tagNdx = tags.indexOf(tag);
-
       if (tagNdx < 0) return;
-      this.tags.splice(tagNdx, 1);
-      this.currentTags = tags.join(', ');
-      this.$emit('change', this.currentTags);
+      tags.splice(tagNdx, 1);
+      this.currentTags = tags.join(", ");
+      this.$emit("change", this.currentTags);
     }
   }
-}
+};
 </script>
 
 <style scoped src="./tagsAdder.pcss"></style>
