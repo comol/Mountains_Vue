@@ -1,6 +1,7 @@
 extends ./main.layout.pug
 
 block content
+
   .welcome-section
     section.fullscreen-section.hero
       .container.hero__container
@@ -10,10 +11,23 @@ block content
           .header__menu 
             nav.menu
               ul.menu__list
-                - var menuLinks = ["Обо мне", "Навыки", "Работы", "Отзывы"];
-                each item in menuLinks 
+                - var menuLinks = ["Обо мне", "Навыки", "Работы", "Отзывы", "Админка"];
+                each item in menuLinks
+
                   li.menu__item
-                    a(href="#").menu__link #{item}
+                    case item
+                      when "Обо мне"
+                        a(href="#about").menu__link #{item}
+                      when "Навыки"
+                        a(href="#skills").menu__link #{item}
+                      when "Работы"
+                        a(href="#works").menu__link #{item}
+                      when "Отзывы"
+                        a(href="#revieus").menu__link #{item}
+                      when "Админка"
+                        a(href="admin").menu__link #{item}
+                      default
+                        a(href="#").menu__link #{item}
           .header__buttons
             ul.socials
               - var socials = ['insta', 'vk', 'github', 'envelope'];
@@ -21,7 +35,9 @@ block content
                 li.socials__item
                   a(href=`${item === 'envelope' ? 'mailto:sabantsev@yandex.ru' : '#'}`).socials__link
                     +icon(item, 'socials__icon')
-
+          .header__humburger
+            a.ham(href="#" onclick = 'document.getElementById("nav").classList.toggle("active");')
+              +image('content/ham.png' , 'hambg-pic' )
         .hero__content
           .userinfo
             .userinfo__title Личный сайт #[span.userinfo__occ веб разработчика]
@@ -30,7 +46,7 @@ block content
           .scroll-down
             a(href="").scroll-down__btn Скролл
             
-    section.about
+    section.about#about
       .container
         .about__columns
           .about__user
@@ -65,7 +81,7 @@ block content
     svg(viewBox="0 0 1000 100" preserveAspectRatio="none").triangles__shape.triangles__shape_right
       polygon(points="0,100 1000,100 1000,0")
   .middle-section
-    section.values
+    section.values#skills
       .container.values__container
         .values__wrapper
           .values__title
@@ -75,7 +91,7 @@ block content
                 p Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
           .values__widget
             #skills-component
-    section.works
+    section.works#works
       .container.works__container
         .section-title.works__section-title Мои работы
         .works__content
@@ -85,7 +101,7 @@ block content
       polygon(points="0,0 1000,0 1000,100")
     svg(viewBox="0 0 1000 100" preserveAspectRatio="none").triangles__shape.triangles__shape_right
       polygon(points="0,0 0,100 1000,0")
-  section.contacts
+  section.contacts#revieus
     .container.contacts__container
       .contacts__about
         #reviews-component

@@ -3,6 +3,7 @@
     <div class="content">
       <form class="form" @submit.prevent="handleSubmit">
         <div class="form-title">Авторизация</div>
+        <div class="form-cred">(для теста логин: oleg пароль: oleg)</div>
         <div class="row">
           <app-input
               title="Логин"

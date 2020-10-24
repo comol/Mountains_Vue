@@ -74,7 +74,7 @@ new Vue({
     },
     async fetchReviews() {
       const { data: reviews } = await axios.get("/reviews/382");
-
+      console.log(reviews);
       this.reviews = reviews;
     }
   },

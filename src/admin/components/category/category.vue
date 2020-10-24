@@ -1,7 +1,7 @@
 <template>
     <card slim>
         <edit-line slot="title" @lineedited="onLineEdited" v-model="categoryTitle" :editModeByDefault="empty"
-                   @remove="$emit('remove', $event)"
+                   @removeline="$emit('remove', $event)"
                    @approve="$emit('approve', $event)"
         />
         <template slot="content">

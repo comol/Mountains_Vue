@@ -59,10 +59,10 @@ const routes = [
     },
 ];
 
-const router = new VueRouter({ routes });
+const router = new VueRouter({ base: '/mountains/admin/', routes });
 
 const guard = axios.create({
-    baseURL: "http://home.filippovoleg.ru:9000"
+    baseURL: "http://filippovoleg.ru/mountains"
 });
 
 router.beforeEach(async (to, from, next) => {

@@ -2,16 +2,22 @@
     display: flex;
 }
 
+
 .form-rows {
     display: flex;
+    justify-content: center;
 }
 
 .form-col {
     width: 50%;
-    margin-right: 30px;
 
     &--image {
         width: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-right: 20px;
+
     }
 
     &--content {
@@ -26,28 +32,33 @@
 .form-col-int {
     display: flex;
     padding-right: 30px;
-
+    flex: 1;
 }
 
 .form-row-int {
     display: flex;
     padding-bottom: 20px;
+}
 
+.form-row-textarea {
+    display: flex;
+    flex: 1;
+}
+
+.int-textarea {
+    flex: 1;
 }
 
 .uploader {
-    min-height: 276px;
     display: flex;
+    width: 12.5rem;
+    height: 12.5rem;
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    background: #dee4ed;
-    border: 1px dashed #a1a1a1;
     text-align: center;
     position: relative;
-    background-size: cover;
-    border-radius: 189px;
-    margin-bottom: 20px;
+    border-radius: 50%;
 
     &.active {
         .uploader-title {
@@ -68,11 +79,14 @@
 
 .uploader-btn {
     display: flex;
-    justify-content: center;
+
 }
 
 .form-row {
     margin-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .form-btns {
@@ -87,3 +101,4 @@
         margin-right: 0;
     }
 }
+

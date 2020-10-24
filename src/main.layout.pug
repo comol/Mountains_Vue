@@ -9,6 +9,26 @@ html(lang="en")
     title Portfolio | main page
   body
     .wrapper
+      .hamburger-panel(id="nav")
+        a.close-btn.hamburger__btn(href='#' onclick = 'document.getElementById("nav").classList.toggle("active");')
+        ul.hamburger-panel__menu
+          li.hamburger-panel__item
+            a.hamburger-panel__link(href="#") Главная
+          li.hamburger-panel__item
+            a.hamburger-panel__link(href="#") Обо мне
+          li.hamburger-panel__item
+            a.hamburger-panel__link(href="#") Навыки
+          li.hamburger-panel__item
+            a.hamburger-panel__link(href="#") Работы
+          li.hamburger-panel__item
+            a.hamburger-panel__link(href="#") Отзывы
+          li.hamburger-panel__item
+        ul.ham_socials
+          - var socials = ['insta', 'vk', 'github', 'envelope'];
+          each item in socials
+            li.socials__item
+              a(href=`${item === 'envelope' ? 'mailto:sabantsev@yandex.ru' : '#'}`).socials__link
+                +icon(item, 'socials__icon')
       .maincontent
         block content
 

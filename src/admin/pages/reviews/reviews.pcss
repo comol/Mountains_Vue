@@ -1,3 +1,5 @@
+@import "../../../styles/mixins.pcss";
+
 .cards {
     display: flex;
     flex-wrap: wrap;
@@ -21,5 +23,23 @@
     display: flex;
     align-items: center;
     color: #414C63;
-    padding-bottom: 50px;
+}
+
+.page-header {
+    display: flex;
+    margin-bottom: 60px;
+    @include phones {
+        flex-direction: column;
+        margin-bottom: 30px;
+        margin-top: 10px;
+    }
+}
+
+.page-content {
+    padding: 60px 0 20px;
+    flex: 1;
+    @include phones {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
 }
